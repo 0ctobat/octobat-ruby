@@ -1,0 +1,41 @@
+= Octobat Ruby bindings
+
+== Installation
+
+You don't need this source code unless you want to modify the gem. If
+you just want to use the Octobat Ruby bindings, you should run:
+
+  gem install octobat
+
+If you want to build the gem from source:
+
+  gem build octobat.gemspec
+
+== Requirements
+
+* Ruby 1.8.7 or above. (Ruby 1.8.6 may work if you load
+  ActiveSupport.) For Ruby versions before 1.9.2, you'll need to add this to your Gemfile:
+
+    if Gem::Version.new(RUBY_VERSION) < Gem::Version.new('1.9.2')
+      gem 'rest-client', '~> 1.6.8'
+    end
+
+
+* rest-client, json
+
+== Mirrors
+
+The octobat gem is mirrored on Rubygems, so you should be able to
+install it via <tt>gem install octobat</tt> if desired.
+
+Note that if you are installing via bundler, you should be sure to use the https
+rubygems source in your Gemfile, as any gems fetched over http could potentially be
+compromised in transit and alter the code of gems fetched securely over https:
+
+  source 'https://rubygems.org'
+
+  gem 'rails'
+  gem 'octobat'
+
+== Development
+Test cases are currently being written.
