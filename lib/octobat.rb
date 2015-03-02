@@ -41,6 +41,7 @@ require 'octobat/errors/authentication_error'
 module Octobat
   #DEFAULT_CA_BUNDLE_PATH = File.dirname(__FILE__) + '/data/ca-certificates.crt'
   @api_base = 'https://api.octobat.com'
+  #@api_base = 'http://api.octobat.local:3040'
 
   #@ssl_bundle_path  = DEFAULT_CA_BUNDLE_PATH
   #@verify_ssl_certs = true

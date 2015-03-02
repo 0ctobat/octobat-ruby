@@ -7,7 +7,11 @@ module Octobat
         h.each { |k, v| res[k] = expand_nested_objects(v) unless v.nil? }
         res
       when Array
-        res = {'' => h.map{|v| expand_nested_objects(v)}}
+        if !h.empty? && h.first.is_a?(Hash)
+          res = {'' => h.map{|v| expand_nested_objects(v)}}
+        else
+          res = h
+        end
         res
       else
         h
