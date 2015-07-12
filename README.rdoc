@@ -23,6 +23,14 @@ If you want to build the gem from source:
 
 * rest-client, json
 
+== Examples
+
+* Get a customer with its invoices
+
+```ruby
+customer = Octobat::Customer.retrieve({id: "oc_cus_0123456789abcdef", "include[]" => "invoices"})
+```
+
 == Mirrors
 
 The octobat gem is mirrored on Rubygems, so you should be able to
