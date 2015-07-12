@@ -1,7 +1,16 @@
 #!/usr/bin/env ruby
-irb = RUBY_PLATFORM =~ /(:?mswin|mingw)/ ? 'irb.bat' : 'irb'
 
-libs =  " -r irb/completion"
-libs <<  " -r #{File.dirname(__FILE__) + '/../lib/octobat'}"
+begin
+  require "pry"
+  repl = "pry"
+rescue LoadError
+  repl = RUBY_PLATFORM =~ /(:?mswin|mingw)/ ? 'irb.bat' : 'irb'
+end
+
+
+lib_path = File.dirname(__FILE__) + '/../lib'
+libs = " -r irb/completion"
+libs <<  " -r #{lib_path}/octobat"
 puts "Loading Octobat gem"
-exec "#{irb} #{libs} --simple-prompt"
+
+exec "#{repl} -I#{lib_path} #{libs} --simple-prompt"
