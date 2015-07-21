@@ -1,4 +1,4 @@
-=== 0.0.4 2015-07-21
+=== 0.0.5 2015-07-21
 * 1 minor enhancement:
   * Add invoices#all customer filter and Customer.invoices method
   
