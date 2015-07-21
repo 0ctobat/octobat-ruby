@@ -4,8 +4,8 @@ module Octobat
     include Octobat::APIOperations::Create
     include Octobat::APIOperations::Update
     
-    def invoices
-      Invoice.all({ :customer => id }, @api_key)
+    def invoices(params = {})
+      Invoice.all(params.merge({ :customer => id }), @api_key)
     end
     
   end
