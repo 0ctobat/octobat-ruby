@@ -1,3 +1,8 @@
+=== 0.0.6 2015-10-13
+* 2 minor enhancements:
+  * Add invoices#update for non already-sent invoices
+  * Add invoices#send to make the email sending programmable
+
 === 0.0.5 2015-07-21
 * 1 minor enhancement:
   * Add invoices#all customer filter and Customer.invoices method
