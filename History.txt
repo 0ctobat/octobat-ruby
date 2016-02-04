@@ -1,3 +1,9 @@
+=== 0.0.7 2016-02-04
+* 3 minor enhancements:
+  * Add the draft invoices feature, refactoring invoices#create to create only draft invoices
+  * Add invoices#confirm to confirm draft invoices and insert them into the numbering sequence
+  * Add invoice_items#create for creating invoice items
+
 === 0.0.6 2015-10-13
 * 2 minor enhancements:
   * Add invoices#update for non already-sent invoices
