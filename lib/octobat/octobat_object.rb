@@ -144,12 +144,14 @@ module Octobat
           k_eq = :"#{k}="
           define_method(k) { @values[k] }
           define_method(k_eq) do |v|
+=begin
             if v == ""
               raise ArgumentError.new(
                 "You cannot set #{k} to an empty string." \
                 "We interpret empty strings as nil in requests." \
                 "You may set #{self}.#{k} = nil to delete the property.")
             end
+=end
             @values[k] = v
             @unsaved_values.add(k)
           end
