@@ -11,7 +11,7 @@ module Octobat
         if values.length > 0
           values.delete(:id)
 
-          response, api_key = Octobat.request(:patch, url, @api_key, values)
+          response, api_key = Octobat.request(save_method, save_url, @api_key, values)
           refresh_from(response, api_key)
         end
         self
@@ -52,6 +52,23 @@ module Octobat
           obj
         end
       end
+      
+      private
+        def save_url
+          if self[:id] == nil && self.class.respond_to?(:create)
+            self.class.url
+          else
+            url
+          end
+        end
+        
+        def save_method
+          if self[:id] == nil && self.class.respond_to?(:create)
+            :post
+          else
+            :patch
+          end
+        end
     end
   end
 end
