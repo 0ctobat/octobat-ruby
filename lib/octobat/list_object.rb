@@ -53,7 +53,7 @@ module Octobat
 
 
     def previous_page_params(params={}, opts={})
-      return nil if cursors[:starting_after].nil? || cursors[:starting_after].empty?
+      return nil if !has_before
       first_id = data.first.id
 
       params = filters.merge({
