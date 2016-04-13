@@ -1,5 +1,15 @@
 module Octobat
   class ListObject < OctobatObject
+    include Enumerable
+    include Octobat::APIOperations::List
+    
+    attr_accessor :filters, :cursors
+    
+    def initialize(*args)
+      super
+      self.filters = {}
+      self.cursors = {}
+    end
 
     def [](k)
       case k
@@ -13,10 +23,14 @@ module Octobat
     def each(&blk)
       self.data.each(&blk)
     end
+    
+    def empty?
+      self.data.empty?
+    end
 
     def retrieve(id, api_key=nil)
       api_key ||= @api_key
-      response, api_key = Octobat.request(:get,"#{url}/#{CGI.escape(id)}", api_key)
+      response, api_key = Octobat.request(:get, "#{url}/#{CGI.escape(id)}", api_key)
       Util.convert_to_octobat_object(response, api_key)
     end
 
@@ -27,11 +41,25 @@ module Octobat
       Util.convert_to_octobat_object(response, api_key)
     end
 
-    def all(params={}, opts={})
-      api_key, headers = Util.parse_opts(opts)
-      api_key ||= @api_key
-      response, api_key = Octobat.request(:get, url, api_key, params, headers)
-      Util.convert_to_octobat_object(response, api_key)
+    
+    def next_page_params(params={}, opts={})
+      return nil if !has_more
+      last_id = data.last.id
+
+      params = filters.merge({
+        starting_after: last_id
+      }).merge(params)
     end
+
+
+    def previous_page_params(params={}, opts={})
+      return nil if cursors[:starting_after].nil? || cursors[:starting_after].empty?
+      first_id = data.first.id
+
+      params = filters.merge({
+        ending_before: first_id
+      }).merge(params)
+    end
+    
   end
 end
