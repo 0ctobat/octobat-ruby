@@ -23,13 +23,14 @@ require 'octobat/api_resource'
 require 'octobat/singleton_api_resource'
 require 'octobat/list_object'
 
-require 'octobat/numbering_sequence'
+require 'octobat/customer'
+require 'octobat/transaction'
+require 'octobat/invoice_numbering_sequence'
 require 'octobat/payment_mode'
 require 'octobat/payment'
 require 'octobat/credit_note_numbering_sequence'
-require 'octobat/customer'
 require 'octobat/invoice'
-require 'octobat/invoice_item'
+require 'octobat/item'
 
 # Errors
 require 'octobat/errors/octobat_error'

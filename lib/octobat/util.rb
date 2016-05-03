@@ -17,7 +17,7 @@ module Octobat
         h
       end
     end
-    
+
     def self.objects_to_ids(h)
       case h
       when APIResource
@@ -41,11 +41,12 @@ module Octobat
         # business objects
         'payment_mode' => PaymentMode,
         'payment' => Payment,
-        'numbering_sequence' => NumberingSequence,
+        'invoice_numbering_sequence' => InvoiceNumberingSequence,
         'credit_note_numbering_sequence' => CreditNoteNumberingSequence,
         'invoice' => Invoice,
-        'invoice_item' => InvoiceItem,
-        'customer' => Customer
+        'item' => Item,
+        'customer' => Customer,
+        'transaction' => Transaction
       }
     end
 
