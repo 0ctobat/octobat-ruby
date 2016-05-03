@@ -1,5 +1,5 @@
 module Octobat
-  class NumberingSequence < APIResource
+  class InvoiceNumberingSequence < APIResource
     extend Octobat::APIOperations::List
   end
 end
