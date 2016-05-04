@@ -2,13 +2,14 @@ module Octobat
   module APIOperations
     module List
       def list(filters={}, opts={})
+        parent_resource(filters)
+        
         api_key, headers = Util.parse_opts(opts)
         api_key ||= @api_key
         
-        #opts = Util.normalize_opts(opts)
-        #opts = @opts.merge(opts) if @opts
-        
-        response, api_key = Octobat.request(:get, url, api_key, filters, headers)
+        f = filters.select{|request_filter| !@parent_resource.has_key?(request_filter)}
+                
+        response, api_key = Octobat.request(:get, url, api_key, f, headers)
         obj = ListObject.construct_from(response, api_key)
         
         obj.filters = filters.dup
@@ -17,6 +18,10 @@ module Octobat
         
         
         obj
+      end
+      
+      def parent_resource(filters)
+        @parent_resource = {}
       end
       
       alias :all :list

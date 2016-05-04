@@ -61,5 +61,10 @@ module Octobat
       }).merge(params)
     end
     
+    
+    def url
+      self.request_url
+    end
+    
   end
 end
