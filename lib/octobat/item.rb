@@ -10,12 +10,12 @@ module Octobat
       url = if filters.include?(:transaction)
         "#{Transaction.url}/#{CGI.escape(filters[:transaction])}/items"
       elsif filters.include?(:invoice)
-        "feu"
+        "#{Invoice.url}/#{CGI.escape(filters[:invoice])}/items"
+      elsif filters.include?(:credit_note)
+        "#{CreditNote.url}/#{CGI.escape(filters[:credit_note])}/items"
       else
         "diallo"
       end
-
-      #   "#{Recipient.resource_url}/#{CGI.escape(recipient)}/cards/#{CGI.escape(id)}"
 
 
       api_key, headers = Util.parse_opts(opts)
@@ -37,3 +37,12 @@ module Octobat
 
   end
 end
+
+# item = i.items.create(
+#   tax_evidence: "oc_tev_1460565379am3be8f5ef71",
+#   quantity: 1,
+#   currency: "USD",
+#   unit_extratax_amount: 19900,
+#   description: "Entreprise Plan"
+# )
+# item.save
