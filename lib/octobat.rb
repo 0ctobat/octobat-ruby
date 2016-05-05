@@ -25,12 +25,13 @@ require 'octobat/list_object'
 
 require 'octobat/customer'
 require 'octobat/transaction'
+require 'octobat/item'
+require 'octobat/invoice'
 require 'octobat/invoice_numbering_sequence'
 require 'octobat/payment_mode'
 require 'octobat/payment'
 require 'octobat/credit_note_numbering_sequence'
-require 'octobat/invoice'
-require 'octobat/item'
+
 
 # Errors
 require 'octobat/errors/octobat_error'
