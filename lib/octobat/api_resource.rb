@@ -23,8 +23,11 @@ module Octobat
       refresh_from(response, api_key)
     end
 
-    def self.retrieve(id, api_key=nil)
-      instance = self.new(id, api_key)
+    def self.retrieve(id, opts={})
+      api_key, headers = Util.parse_opts(opts)
+      opts[:api_key] ||= @api_key
+            
+      instance = self.new(id, opts)
       instance.refresh
       instance
     end
