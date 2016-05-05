@@ -8,5 +8,9 @@ module Octobat
       Invoice.all(params.merge({ :customer => id }), @api_key)
     end
 
+    def payment_sources(params = {})
+      PaymentSource.all(params.merge({ :customer => id }), @api_key)
+    end
+
   end
 end

@@ -39,11 +39,12 @@ module Octobat
         'list' => ListObject,
 
         # business objects
-        'payment_mode' => PaymentMode,
-        'payment' => Payment,
+        'payment_recipient' => PaymentRecipient,
+        'payment_source' => PaymentSource,
         'invoice_numbering_sequence' => InvoiceNumberingSequence,
         'credit_note_numbering_sequence' => CreditNoteNumberingSequence,
         'invoice' => Invoice,
+        'credit_note' => CreditNote,
         'item' => Item,
         'customer' => Customer,
         'transaction' => Transaction
