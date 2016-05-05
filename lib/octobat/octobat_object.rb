@@ -10,7 +10,7 @@ module Octobat
       undef :id
     end
 
-    def initialize(id=nil, api_key=nil)
+    def initialize(id=nil, opts={})
       # parameter overloading!
       if id.kind_of?(Hash)
         @retrieve_options = id.dup
@@ -20,7 +20,7 @@ module Octobat
         @retrieve_options = {}
       end
 
-      @api_key = api_key
+      @api_key = opts[:api_key]
       @values = {}
       # This really belongs in APIResource, but not putting it there allows us
       # to have a unified inspect method
@@ -30,7 +30,7 @@ module Octobat
     end
 
     def self.construct_from(values, api_key=nil)
-      self.new(values[:id], api_key).refresh_from(values, api_key)
+      self.new(values[:id], api_key: api_key).refresh_from(values, api_key)
     end
 
     def to_s(*args)
