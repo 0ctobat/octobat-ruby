@@ -27,9 +27,10 @@ require 'octobat/customer'
 require 'octobat/transaction'
 require 'octobat/item'
 require 'octobat/invoice'
+require 'octobat/credit_note'
+require 'octobat/payment_recipient'
+require 'octobat/payment_source'
 require 'octobat/invoice_numbering_sequence'
-require 'octobat/payment_mode'
-require 'octobat/payment'
 require 'octobat/credit_note_numbering_sequence'
 
 

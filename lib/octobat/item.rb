@@ -19,12 +19,3 @@ module Octobat
     end
   end
 end
-
-# item = i.items.create(
-#   tax_evidence: "oc_tev_1460565379am3be8f5ef71",
-#   quantity: 1,
-#   currency: "USD",
-#   unit_extratax_amount: 19900,
-#   description: "Entreprise Plan"
-# )
-# item.save

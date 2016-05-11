@@ -1,21 +1,16 @@
 module Octobat
-  class Invoice < APIResource
+  class CreditNote < APIResource
     extend Octobat::APIOperations::List
     include Octobat::APIOperations::Create
     include Octobat::APIOperations::Update
 
-    def payments(payment_data)
-      response, api_key = Octobat.request(:post, pay_url, @api_key, payment_data)
+    def refunds(refund_data)
+      response, api_key = Octobat.request(:post, refund_url, @api_key, refund_data)
       refresh_from(response, api_key)
     end
 
     def send(enforce_errors = false)
       response, api_key = Octobat.request(:post, send_url, @api_key, {enforce_errors: enforce_errors})
-      refresh_from(response, api_key)
-    end
-
-    def confirm
-      response, api_key = Octobat.request(:patch, confirm_url, @api_key)
       refresh_from(response, api_key)
     end
 
@@ -25,16 +20,12 @@ module Octobat
 
     private
 
-      def pay_url
-        url + '/payments'
+      def refund_url
+        url + '/refunds'
       end
 
       def send_url
         url + '/send'
-      end
-
-      def confirm_url
-        url + '/confirm'
       end
   end
 end
