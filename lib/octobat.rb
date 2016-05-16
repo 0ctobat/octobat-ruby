@@ -243,14 +243,14 @@ module Octobat
     begin
       error_obj = JSON.parse(rbody)
       error_obj = Util.symbolize_names(error_obj)
-      error = error_obj[:error] or raise OctobatError.new # escape from parsing
+      error = error_obj[:errors] or raise OctobatError.new # escape from parsing
 
     rescue JSON::ParserError, OctobatError
       raise general_api_error(rcode, rbody)
     end
 
     case rcode
-    when 400, 404
+    when 400, 404, 422
       raise invalid_request_error error, rcode, rbody, error_obj
     when 401
       raise authentication_error error, rcode, rbody, error_obj
@@ -261,8 +261,7 @@ module Octobat
   end
 
   def self.invalid_request_error(error, rcode, rbody, error_obj)
-    InvalidRequestError.new(error[:message], error[:param], rcode,
-                            rbody, error_obj)
+    InvalidRequestError.new(error, rcode, rbody, error_obj)
   end
 
   def self.authentication_error(error, rcode, rbody, error_obj)
