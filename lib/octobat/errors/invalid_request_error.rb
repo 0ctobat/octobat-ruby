@@ -1,10 +1,8 @@
 module Octobat
   class InvalidRequestError < OctobatError
-    attr_accessor :param
 
-    def initialize(message, param, http_status=nil, http_body=nil, json_body=nil)
-      super(message, http_status, http_body, json_body)
-      @param = param
+    def initialize(error, http_status=nil, http_body=nil, json_body=nil)
+      super(error, http_status, http_body, json_body)
     end
   end
 end

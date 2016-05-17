@@ -45,6 +45,11 @@ module Octobat
   #DEFAULT_CA_BUNDLE_PATH = File.dirname(__FILE__) + '/data/ca-certificates.crt'
   #@api_base = 'https://api.octobat.com'
   @api_base = 'http://api.octobat.local:3052'
+  
+  @max_network_retries = 0
+  @max_network_retry_delay = 2
+  @initial_network_retry_delay = 0.5
+  
 
   #@ssl_bundle_path  = DEFAULT_CA_BUNDLE_PATH
   #@verify_ssl_certs = true
@@ -53,6 +58,7 @@ module Octobat
 
   class << self
     attr_accessor :api_key, :api_base, :verify_ssl_certs, :api_version
+    attr_reader :max_network_retry_delay, :initial_network_retry_delay
   end
 
   def self.api_url(url='', api_base_url=nil)
@@ -101,19 +107,33 @@ module Octobat
       end
     end
 
-    request_opts.update(:headers => request_headers(api_key).update(headers),
+    request_opts.update(:headers => request_headers(api_key, method).update(headers),
                         :method => method, :open_timeout => 30,
                         :payload => payload, :url => url, :timeout => 80)
+    
+    response = execute_request_with_rescues(request_opts, api_base_url)
+    [parse(response), api_key]
+  end
+  
+  def self.max_network_retries
+    @max_network_retries
+  end
 
+  def self.max_network_retries=(val)
+    @max_network_retries = val.to_i
+  end
+  
+  
+  def self.execute_request_with_rescues(request_opts, api_base_url, retry_count = 0)
     begin
       response = execute_request(request_opts)
     rescue SocketError => e
-      handle_restclient_error(e, api_base_url)
+      response = handle_restclient_error(e, request_opts, retry_count, api_base_url)
     rescue NoMethodError => e
       # Work around RestClient bug
       if e.message =~ /\WRequestFailed\W/
         e = APIConnectionError.new('Unexpected HTTP response code')
-        handle_restclient_error(e, api_base_url)
+        response = handle_restclient_error(e, request_opts, retry_count, api_base_url)
       else
         raise
       end
@@ -121,13 +141,13 @@ module Octobat
       if rcode = e.http_code and rbody = e.http_body
         handle_api_error(rcode, rbody)
       else
-        handle_restclient_error(e, api_base_url)
+        response = handle_restclient_error(e, request_opts, retry_count, api_base_url)
       end
     rescue RestClient::Exception, Errno::ECONNREFUSED => e
-      handle_restclient_error(e, api_base_url)
+      response = handle_restclient_error(e, request_opts, retry_count, api_base_url)
     end
 
-    [parse(response), api_key]
+    response
   end
 
   private
@@ -177,12 +197,16 @@ module Octobat
       map { |k,v| "#{k}=#{Util.url_encode(v)}" }.join('&')
   end
 
-  def self.request_headers(api_key)
+  def self.request_headers(api_key, method)
     headers = {
       :user_agent => "Octobat/v1 RubyBindings/#{Octobat::VERSION}",
       :authorization => 'Basic ' + Base64.encode64( "#{api_key}:" ).chomp,
       :content_type => 'application/x-www-form-urlencoded'
     }
+    
+    if [:post, :delete, :patch].include?(method) && self.max_network_retries > 0
+      headers[:idempotency_key] ||= SecureRandom.uuid
+    end
 
     headers[:octobat_version] = api_version if api_version
 
@@ -219,14 +243,14 @@ module Octobat
     begin
       error_obj = JSON.parse(rbody)
       error_obj = Util.symbolize_names(error_obj)
-      error = error_obj[:error] or raise OctobatError.new # escape from parsing
+      error = error_obj[:errors] or raise OctobatError.new # escape from parsing
 
     rescue JSON::ParserError, OctobatError
       raise general_api_error(rcode, rbody)
     end
 
     case rcode
-    when 400, 404
+    when 400, 404, 422
       raise invalid_request_error error, rcode, rbody, error_obj
     when 401
       raise authentication_error error, rcode, rbody, error_obj
@@ -237,8 +261,7 @@ module Octobat
   end
 
   def self.invalid_request_error(error, rcode, rbody, error_obj)
-    InvalidRequestError.new(error[:message], error[:param], rcode,
-                            rbody, error_obj)
+    InvalidRequestError.new(error, rcode, rbody, error_obj)
   end
 
   def self.authentication_error(error, rcode, rbody, error_obj)
@@ -254,7 +277,16 @@ module Octobat
     APIError.new(error[:message], rcode, rbody, error_obj)
   end
 
-  def self.handle_restclient_error(e, api_base_url=nil)
+  def self.handle_restclient_error(e, request_opts, retry_count, api_base_url=nil)
+    
+    if should_retry?(e, retry_count)
+      retry_count = retry_count + 1
+      sleep sleep_time(retry_count)
+      response = execute_request_with_rescues(request_opts, api_base_url, retry_count)
+      return response
+    end
+    
+    
     api_base_url = @api_base unless api_base_url
     connection_message = "Please check your internet connection and try again. " \
         "If this problem persists, you should check Octobat's service status at " \
@@ -284,7 +316,35 @@ module Octobat
         "If this problem persists, let us know at contact@octobat.com."
 
     end
-
+    
+    if retry_count > 0
+      message += " Request was retried #{retry_count} times."
+    end
+    
     raise APIConnectionError.new(message + "\n\n(Network error: #{e.message})")
   end
+  
+  
+  def self.should_retry?(e, retry_count)
+    puts "Retry count: #{retry_count}"
+    return false if retry_count >= self.max_network_retries
+    #return false if e.is_a?(RestClient::SSLCertificateNotVerified)
+    return true
+  end
+
+  def self.sleep_time(retry_count)
+    # This method was adapted from https://github.com/ooyala/retries/blob/master/lib/retries.rb
+
+    # The sleep time is an exponentially-increasing function of base_sleep_seconds. But, it never exceeds
+    # max_sleep_seconds.
+    sleep_seconds = [initial_network_retry_delay * (2 ** (retry_count - 1)), max_network_retry_delay].min
+    # Randomize to a random value in the range sleep_seconds/2 .. sleep_seconds
+
+    sleep_seconds = sleep_seconds * (0.5 * (1 + rand()))
+    # But never sleep less than base_sleep_seconds
+    sleep_seconds = [initial_network_retry_delay, sleep_seconds].max
+
+    sleep_seconds
+  end
+  
 end

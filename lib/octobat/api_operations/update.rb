@@ -1,8 +1,11 @@
 module Octobat
   module APIOperations
     module Update
-      def save(opts={})
+      def save(opts={}, headers = {})
         values = serialize_params(self).merge(opts)
+        
+        api_key, headers = Util.parse_opts(headers)
+        api_key ||= @api_key
 
         if @values[:metadata]
           values[:metadata] = serialize_metadata
@@ -11,7 +14,7 @@ module Octobat
         if values.length > 0
           values.delete(:id)
 
-          response, api_key = Octobat.request(save_method, save_url, @api_key, values)
+          response, api_key = Octobat.request(save_method, save_url, api_key, values)
           refresh_from(response, api_key)
         end
         self
