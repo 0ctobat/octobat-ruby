@@ -16,6 +16,8 @@ module Octobat
         obj.cursors[:ending_before] = obj.filters.delete(:ending_before)
         obj.cursors[:starting_after] = obj.filters.delete(:starting_after)
         
+        obj.filters.delete(:expand)
+        
         obj
       end
       
