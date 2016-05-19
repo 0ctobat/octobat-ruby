@@ -19,6 +19,21 @@ module Octobat
       refresh_from(response, api_key)
     end
 
+    def cancel
+      response, api_key = Octobat.request(:patch, cancel_url, @api_key)
+      refresh_from(response, api_key)
+    end
+
+    def cancel_and_replace
+      response, api_key = Octobat.request(:patch, cancel_and_replace_url, @api_key)
+      refresh_from(response, api_key)
+    end
+
+    def delete
+      response, api_key = Octobat.request(:delete, url, @api_key)
+      refresh_from(response, api_key)
+    end
+
     def items(params = {})
       Item.list(params.merge({ :invoice => id }), @api_key)
     end
@@ -35,6 +50,14 @@ module Octobat
 
       def confirm_url
         url + '/confirm'
+      end
+
+      def cancel_url
+        url + '/cancel'
+      end
+
+      def cancel_and_replace_url
+        url + '/cancel_and_replace'
       end
   end
 end
