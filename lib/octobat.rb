@@ -32,6 +32,7 @@ require 'octobat/payment_recipient'
 require 'octobat/payment_source'
 require 'octobat/invoice_numbering_sequence'
 require 'octobat/credit_note_numbering_sequence'
+require 'octobat/document_template'
 
 
 # Errors
@@ -46,11 +47,11 @@ module Octobat
   #DEFAULT_CA_BUNDLE_PATH = File.dirname(__FILE__) + '/data/ca-certificates.crt'
   #@api_base = 'https://api.octobat.com'
   @api_base = 'http://api.octobat.local:3052'
-  
+
   @max_network_retries = 0
   @max_network_retry_delay = 2
   @initial_network_retry_delay = 0.5
-  
+
 
   #@ssl_bundle_path  = DEFAULT_CA_BUNDLE_PATH
   #@verify_ssl_certs = true
@@ -111,11 +112,11 @@ module Octobat
     request_opts.update(:headers => request_headers(api_key, method).update(headers),
                         :method => method, :open_timeout => 30,
                         :payload => payload, :url => url, :timeout => 80)
-    
+
     response = execute_request_with_rescues(request_opts, api_base_url)
     [parse(response), api_key]
   end
-  
+
   def self.max_network_retries
     @max_network_retries
   end
@@ -123,8 +124,8 @@ module Octobat
   def self.max_network_retries=(val)
     @max_network_retries = val.to_i
   end
-  
-  
+
+
   def self.execute_request_with_rescues(request_opts, api_base_url, retry_count = 0)
     begin
       response = execute_request(request_opts)
@@ -204,7 +205,7 @@ module Octobat
       :authorization => 'Basic ' + Base64.encode64( "#{api_key}:" ).chomp,
       :content_type => 'application/x-www-form-urlencoded'
     }
-    
+
     if [:post, :delete, :patch].include?(method) && self.max_network_retries > 0
       headers[:idempotency_key] ||= SecureRandom.uuid
     end
@@ -279,15 +280,15 @@ module Octobat
   end
 
   def self.handle_restclient_error(e, request_opts, retry_count, api_base_url=nil)
-    
+
     if should_retry?(e, retry_count)
       retry_count = retry_count + 1
       sleep sleep_time(retry_count)
       response = execute_request_with_rescues(request_opts, api_base_url, retry_count)
       return response
     end
-    
-    
+
+
     api_base_url = @api_base unless api_base_url
     connection_message = "Please check your internet connection and try again. " \
         "If this problem persists, you should check Octobat's service status at " \
@@ -317,15 +318,15 @@ module Octobat
         "If this problem persists, let us know at contact@octobat.com."
 
     end
-    
+
     if retry_count > 0
       message += " Request was retried #{retry_count} times."
     end
-    
+
     raise APIConnectionError.new(message + "\n\n(Network error: #{e.message})")
   end
-  
-  
+
+
   def self.should_retry?(e, retry_count)
     puts "Retry count: #{retry_count}"
     return false if retry_count >= self.max_network_retries
@@ -347,5 +348,5 @@ module Octobat
 
     sleep_seconds
   end
-  
+
 end

@@ -47,6 +47,7 @@ module Octobat
         'credit_note' => CreditNote,
         'item' => Item,
         'customer' => Customer,
+        'document_template' => DocumentTemplate,
         'transaction' => Transaction
       }
     end
