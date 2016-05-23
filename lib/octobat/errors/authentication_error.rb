@@ -1,4 +1,4 @@
 module Octobat
-  class AuthenticationError < OctobatError
+  class AuthenticationError < OctobatLibError
   end
 end
