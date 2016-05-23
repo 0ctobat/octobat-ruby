@@ -36,6 +36,7 @@ require 'octobat/credit_note_numbering_sequence'
 
 # Errors
 require 'octobat/errors/octobat_error'
+require 'octobat/errors/octobat_lib_error'
 require 'octobat/errors/api_error'
 require 'octobat/errors/api_connection_error'
 require 'octobat/errors/invalid_request_error'

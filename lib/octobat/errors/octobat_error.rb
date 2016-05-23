@@ -26,6 +26,8 @@ module Octobat
       return "" if @error.nil?
       a = []
       
+      puts @error.inspect
+      
       @error.each_key do |k|
         msg = k.eql?(:global) ? "" : "#{k.to_s}: "
         msg << "#{serialize_errors_from(@error[k])}"

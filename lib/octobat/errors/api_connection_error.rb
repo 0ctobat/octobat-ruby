@@ -1,4 +1,4 @@
 module Octobat
-  class APIConnectionError < OctobatError
+  class APIConnectionError < OctobatLibError
   end
 end
