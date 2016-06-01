@@ -33,6 +33,8 @@ require 'octobat/payment_source'
 require 'octobat/invoice_numbering_sequence'
 require 'octobat/credit_note_numbering_sequence'
 require 'octobat/document_template'
+require 'octobat/document_language'
+require 'octobat/checkout'
 
 
 # Errors

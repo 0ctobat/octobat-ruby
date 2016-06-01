@@ -48,6 +48,8 @@ module Octobat
         'item' => Item,
         'customer' => Customer,
         'document_template' => DocumentTemplate,
+        'document_language' => DocumentLanguage,
+        'checkout' => Checkout,
         'transaction' => Transaction
       }
     end
