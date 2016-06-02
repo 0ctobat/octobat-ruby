@@ -50,6 +50,7 @@ module Octobat
         'document_template' => DocumentTemplate,
         'document_language' => DocumentLanguage,
         'checkout' => Checkout,
+        'coupon' => Coupon,
         'transaction' => Transaction
       }
     end

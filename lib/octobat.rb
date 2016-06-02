@@ -35,6 +35,7 @@ require 'octobat/credit_note_numbering_sequence'
 require 'octobat/document_template'
 require 'octobat/document_language'
 require 'octobat/checkout'
+require 'octobat/coupon'
 
 
 # Errors
