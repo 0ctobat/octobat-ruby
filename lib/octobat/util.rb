@@ -40,6 +40,7 @@ module Octobat
 
         # business objects
         'payment_recipient' => PaymentRecipient,
+        'payment_recipient_reference' => PaymentRecipientReference,
         'payment_source' => PaymentSource,
         'invoice_numbering_sequence' => InvoiceNumberingSequence,
         'credit_note_numbering_sequence' => CreditNoteNumberingSequence,
