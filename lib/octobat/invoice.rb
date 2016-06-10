@@ -9,7 +9,7 @@ module Octobat
       refresh_from(response, api_key)
     end
 
-    def send(enforce_errors = false)
+    def send_by_email(enforce_errors = false)
       response, api_key = Octobat.request(:post, send_url, @api_key, {enforce_errors: enforce_errors})
       refresh_from(response, api_key)
     end
@@ -59,5 +59,8 @@ module Octobat
       def cancel_and_replace_url
         url + '/cancel_and_replace'
       end
+
   end
+
+
 end

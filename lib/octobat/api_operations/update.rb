@@ -56,7 +56,7 @@ module Octobat
         end
       end
       
-      private
+      protected
         def save_url
           if self[:id] == nil && self.class.respond_to?(:create)
             self.class.url
