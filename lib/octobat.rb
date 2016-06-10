@@ -29,10 +29,14 @@ require 'octobat/item'
 require 'octobat/invoice'
 require 'octobat/credit_note'
 require 'octobat/payment_recipient'
+require 'octobat/payment_recipient_reference'
 require 'octobat/payment_source'
 require 'octobat/invoice_numbering_sequence'
 require 'octobat/credit_note_numbering_sequence'
 require 'octobat/document_template'
+require 'octobat/document_language'
+require 'octobat/checkout'
+require 'octobat/coupon'
 
 
 # Errors
