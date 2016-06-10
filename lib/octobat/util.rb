@@ -52,6 +52,7 @@ module Octobat
         'document_language' => DocumentLanguage,
         'checkout' => Checkout,
         'coupon' => Coupon,
+        'tax_region' => TaxRegion,
         'transaction' => Transaction
       }
     end

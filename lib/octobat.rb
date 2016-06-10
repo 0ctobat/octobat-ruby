@@ -37,6 +37,7 @@ require 'octobat/document_template'
 require 'octobat/document_language'
 require 'octobat/checkout'
 require 'octobat/coupon'
+require 'octobat/tax_region'
 
 
 # Errors
