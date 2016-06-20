@@ -53,7 +53,8 @@ module Octobat
         'checkout' => Checkout,
         'coupon' => Coupon,
         'tax_region' => TaxRegion,
-        'transaction' => Transaction
+        'transaction' => Transaction,
+        'document_email_template' => DocumentEmailTemplate
       }
     end
 
