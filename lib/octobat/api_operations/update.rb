@@ -40,7 +40,7 @@ module Octobat
       def serialize_params(obj)
         case obj
         when nil
-          ''
+          self[:id].nil? ? nil : ''
         when OctobatObject
           unsaved_keys = obj.instance_variable_get(:@unsaved_values)
           obj_values = obj.instance_variable_get(:@values)
