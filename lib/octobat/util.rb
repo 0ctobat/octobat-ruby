@@ -54,7 +54,9 @@ module Octobat
         'coupon' => Coupon,
         'tax_region' => TaxRegion,
         'transaction' => Transaction,
-        'tax_evidence' => TaxEvidence
+        'tax_evidence' => TaxEvidence,
+        'document_email_template' => DocumentEmailTemplate,
+        'exports_setting' => ExportsSetting
       }
     end
 
