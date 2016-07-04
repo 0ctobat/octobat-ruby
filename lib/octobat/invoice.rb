@@ -9,8 +9,8 @@ module Octobat
       refresh_from(response, api_key)
     end
 
-    def send_by_email(enforce_errors = false)
-      response, api_key = Octobat.request(:post, send_url, @api_key, {enforce_errors: enforce_errors})
+    def send_by_email
+      response, api_key = Octobat.request(:post, send_url, @api_key)
       refresh_from(response, api_key)
     end
 
