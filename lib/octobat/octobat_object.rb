@@ -21,6 +21,9 @@ module Octobat
       end
 
       @api_key = opts[:api_key]
+      
+      @retrieve_options.merge!(opts.clone).delete(:api_key)
+      
       @values = {}
       # This really belongs in APIResource, but not putting it there allows us
       # to have a unified inspect method
