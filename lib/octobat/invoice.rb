@@ -9,8 +9,8 @@ module Octobat
       refresh_from(response, api_key)
     end
 
-    def send_by_email(enforce_errors = false)
-      response, api_key = Octobat.request(:post, send_url, @api_key, {enforce_errors: enforce_errors})
+    def send_by_email(email_data = {})
+      response, api_key = Octobat.request(:post, send_url, @api_key, email_data)
       refresh_from(response, api_key)
     end
 
@@ -37,6 +37,7 @@ module Octobat
     def items(params = {})
       Item.list(params.merge({ :invoice => id }), @api_key)
     end
+    
 
     private
 
