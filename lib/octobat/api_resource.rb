@@ -12,7 +12,6 @@ module Octobat
     end
 
     def url
-      puts self.inspect
       unless id = self['id']
         raise InvalidRequestError.new("Could not determine which URL to request: #{self.class} instance has invalid ID: #{id.inspect}", 'id')
       end

@@ -60,13 +60,15 @@ module Octobat
       }
     end
 
-    def self.convert_to_octobat_object(resp, api_key)
+    def self.convert_to_octobat_object(resp, api_key, parent_resource = nil)
       case resp
       when Array
-        resp.map { |i| convert_to_octobat_object(i, api_key) }
+        resp.map { |i| convert_to_octobat_object(i, api_key, parent_resource) }
       when Hash
         # Try converting to a known object class.  If none available, fall back to generic OctobatObject
-        object_classes.fetch(resp[:object], OctobatObject).construct_from(resp, api_key)
+        obj = object_classes.fetch(resp[:object], OctobatObject).construct_from(resp, api_key)
+        obj.parent_obj = parent_resource if parent_resource && obj.respond_to?(:parent_obj)
+        obj
       else
         resp
       end

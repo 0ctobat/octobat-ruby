@@ -3,12 +3,13 @@ module Octobat
     include Enumerable
     include Octobat::APIOperations::List
     
-    attr_accessor :filters, :cursors
+    attr_accessor :filters, :cursors, :parent_resource
     
     def initialize(*args)
       super
       self.filters = {}
       self.cursors = {}
+      self.parent_resource = {}
     end
 
     def [](k)
@@ -28,10 +29,12 @@ module Octobat
       self.data.empty?
     end
 
-    def retrieve(id, api_key=nil)
+    def retrieve(id, opts={})
+      api_key, headers = Util.parse_opts(opts)
       api_key ||= @api_key
+      
       response, api_key = Octobat.request(:get, "#{url}/#{CGI.escape(id)}", api_key)
-      Util.convert_to_octobat_object(response, api_key)
+      Util.convert_to_octobat_object(response, api_key, self.parent_resource)
     end
 
     def create(params={}, opts={})

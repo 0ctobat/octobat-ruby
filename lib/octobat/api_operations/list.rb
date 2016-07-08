@@ -17,6 +17,7 @@ module Octobat
         obj.cursors[:starting_after] = obj.filters.delete(:starting_after)
 
         obj.filters.delete(:expand)
+        obj.parent_resource = @parent_resource
 
         obj
       end
