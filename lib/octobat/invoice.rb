@@ -38,6 +38,10 @@ module Octobat
       Item.list(params.merge({ :invoice => id }), @api_key)
     end
 
+    def transactions(params = {})
+      TransactionFlow.list(params.merge({ :invoice => id }), @api_key)
+    end
+
     private
 
       def pay_url
