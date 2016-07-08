@@ -17,6 +17,10 @@ module Octobat
     def items(params = {})
       Item.list(params.merge({ :invoice => id }), @api_key)
     end
+    
+    def transactions(params = {})
+      Transaction.list(params.merge(invoice: id), @api_key)
+    end
 
     private
 
