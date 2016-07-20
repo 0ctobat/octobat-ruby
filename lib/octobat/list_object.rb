@@ -48,7 +48,7 @@ module Octobat
     def next_page_params(params={}, opts={})
       return nil if !has_more
       last_id = data.last.id
-
+      
       params = filters.merge({
         starting_after: last_id
       }).merge(params)

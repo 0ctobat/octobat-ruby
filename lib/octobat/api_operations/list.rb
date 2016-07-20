@@ -2,7 +2,7 @@ module Octobat
   module APIOperations
     module List
       def list(filters={}, opts={})
-        parent_resource(filters)
+        set_parent_resource(filters)
 
         api_key, headers = Util.parse_opts(opts)
         api_key ||= @api_key
@@ -22,7 +22,7 @@ module Octobat
         obj
       end
 
-      def parent_resource(filters)
+      def set_parent_resource(filters)
         @parent_resource = {}
       end
 

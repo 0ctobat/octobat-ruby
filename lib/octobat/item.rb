@@ -55,7 +55,7 @@ module Octobat
       end
     end
 
-    def self.parent_resource(filters)
+    def self.set_parent_resource(filters)
       @parent_resource = filters.select{|k, v| [:transaction, :invoice, :credit_note].include?(k)}
     end
     
