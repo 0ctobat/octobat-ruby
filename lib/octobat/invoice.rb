@@ -4,11 +4,6 @@ module Octobat
     include Octobat::APIOperations::Create
     include Octobat::APIOperations::Update
 
-    def payments(payment_data)
-      response, api_key = Octobat.request(:post, pay_url, @api_key, payment_data)
-      refresh_from(response, api_key)
-    end
-
     def send_by_email(email_data = {})
       response, api_key = Octobat.request(:post, send_url, @api_key, email_data)
       refresh_from(response, api_key)
@@ -37,17 +32,13 @@ module Octobat
     def items(params = {})
       Item.list(params.merge({ :invoice => id }), @api_key)
     end
-    
+
     def transactions(params = {})
       Transaction.list(params.merge(invoice: id), @api_key)
     end
-    
+
 
     private
-
-      def pay_url
-        url + '/payments'
-      end
 
       def send_url
         url + '/send'
