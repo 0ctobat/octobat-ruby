@@ -3,8 +3,8 @@ module Octobat
     module List
       def list(filters={}, opts={})
         set_parent_resource(filters)
-
         api_key, headers = Util.parse_opts(opts)
+        
         api_key ||= @api_key
 
         f = filters.select{|request_filter| !@parent_resource.has_key?(request_filter)}
