@@ -56,7 +56,8 @@ module Octobat
         'transaction' => Transaction,
         'tax_evidence' => TaxEvidence,
         'document_email_template' => DocumentEmailTemplate,
-        'exports_setting' => ExportsSetting
+        'exports_setting' => ExportsSetting,
+        'emails_setting' => EmailsSetting
       }
     end
 
@@ -147,7 +148,7 @@ module Octobat
       when Hash
         headers = opts.clone
         headers.delete(:api_key)
-        
+
         if opts[:idempotency_key]
           headers[:idempotency_key] = opts[:idempotency_key]
         end
