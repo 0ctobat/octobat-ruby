@@ -145,7 +145,9 @@ module Octobat
       when String
         return opts, {}
       when Hash
-        headers = {}
+        headers = opts.clone
+        headers.delete(:api_key)
+        
         if opts[:idempotency_key]
           headers[:idempotency_key] = opts[:idempotency_key]
         end
