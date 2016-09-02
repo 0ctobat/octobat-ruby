@@ -58,6 +58,7 @@ module Octobat
         'document_email_template' => DocumentEmailTemplate,
         'exports_setting' => ExportsSetting,
         'document' => Document
+        'emails_setting' => EmailsSetting
       }
     end
 
@@ -148,7 +149,7 @@ module Octobat
       when Hash
         headers = opts.clone
         headers.delete(:api_key)
-        
+
         if opts[:idempotency_key]
           headers[:idempotency_key] = opts[:idempotency_key]
         end
