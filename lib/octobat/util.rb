@@ -57,7 +57,7 @@ module Octobat
         'tax_evidence' => TaxEvidence,
         'document_email_template' => DocumentEmailTemplate,
         'exports_setting' => ExportsSetting,
-        'document' => Document
+        'document' => Document,
         'emails_setting' => EmailsSetting
       }
     end
