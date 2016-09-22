@@ -1,8 +1,8 @@
 module Octobat
-  class TaxRegion < APIResource
+  class TaxRegionSetting < APIResource
     extend Octobat::APIOperations::List
-    include Octobat::APIOperations::Create
     include Octobat::APIOperations::Update
+    include Octobat::APIOperations::Create
 
     def activate
       response, api_key = Octobat.request(:patch, activate_url, @api_key)

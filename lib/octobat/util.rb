@@ -52,7 +52,7 @@ module Octobat
         'document_language' => DocumentLanguage,
         'checkout' => Checkout,
         'coupon' => Coupon,
-        'tax_region' => TaxRegion,
+        'tax_region_setting' => TaxRegionSetting,
         'transaction' => Transaction,
         'tax_evidence' => TaxEvidence,
         'document_email_template' => DocumentEmailTemplate,
