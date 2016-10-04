@@ -262,7 +262,7 @@ module Octobat
     end
 
     case rcode
-    when 400, 404, 422
+    when 400, 402, 404, 422
       raise invalid_request_error error, rcode, rbody, error_obj
     when 401
       raise authentication_error error, rcode, rbody, error_obj
