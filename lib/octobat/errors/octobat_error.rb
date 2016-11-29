@@ -19,14 +19,12 @@ module Octobat
 
     def to_s
       status_string = @http_status.nil? ? "" : "(Status #{@http_status}) "
-      "#{status_string}#{@message}"
+      "#{status_string}#{message}"
     end
     
     def generate_message_from_error
       return "" if @error.nil?
       a = []
-      
-      puts @error.inspect
       
       @error.each_key do |k|
         msg = k.eql?(:global) ? "" : "#{k.to_s}: "
