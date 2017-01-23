@@ -55,6 +55,7 @@ module Octobat
         'tax_region_setting' => TaxRegionSetting,
         'transaction' => Transaction,
         'tax_evidence' => TaxEvidence,
+        'tax_evidence_request' => TaxEvidenceRequest,
         'document_email_template' => DocumentEmailTemplate,
         'exports_setting' => ExportsSetting,
         'document' => Document,
