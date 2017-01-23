@@ -1,8 +1,11 @@
 module Octobat
   module APIOperations
     module Update
-      def save(opts={})
+      def save(opts={}, headers = {})
         values = serialize_params(self).merge(opts)
+        
+        api_key, headers = Util.parse_opts(headers)
+        api_key ||= @api_key
 
         if @values[:metadata]
           values[:metadata] = serialize_metadata
@@ -11,7 +14,7 @@ module Octobat
         if values.length > 0
           values.delete(:id)
 
-          response, api_key = Octobat.request(save_method, save_url, @api_key, values)
+          response, api_key = Octobat.request(save_method, save_url, api_key, values)
           refresh_from(response, api_key)
         end
         self
@@ -37,7 +40,7 @@ module Octobat
       def serialize_params(obj)
         case obj
         when nil
-          ''
+          self[:id].nil? ? nil : ''
         when OctobatObject
           unsaved_keys = obj.instance_variable_get(:@unsaved_values)
           obj_values = obj.instance_variable_get(:@values)
@@ -53,7 +56,7 @@ module Octobat
         end
       end
       
-      private
+      protected
         def save_url
           if self[:id] == nil && self.class.respond_to?(:create)
             self.class.url

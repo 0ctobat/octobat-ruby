@@ -1,5 +1,5 @@
 module Octobat
-  class PaymentMode < APIResource
+  class PaymentRecipient < APIResource
     extend Octobat::APIOperations::List
     include Octobat::APIOperations::Create
     include Octobat::APIOperations::Update

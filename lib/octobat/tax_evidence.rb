@@ -1,5 +1,5 @@
 module Octobat
-  class InvoiceItem < APIResource
+  class TaxEvidence < APIResource
     include Octobat::APIOperations::Create
   end
 end

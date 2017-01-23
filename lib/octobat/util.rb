@@ -17,7 +17,7 @@ module Octobat
         h
       end
     end
-    
+
     def self.objects_to_ids(h)
       case h
       when APIResource
@@ -39,23 +39,38 @@ module Octobat
         'list' => ListObject,
 
         # business objects
-        'payment_mode' => PaymentMode,
-        'payment' => Payment,
-        'numbering_sequence' => NumberingSequence,
+        'payment_recipient' => PaymentRecipient,
+        'payment_recipient_reference' => PaymentRecipientReference,
+        'payment_source' => PaymentSource,
+        'invoice_numbering_sequence' => InvoiceNumberingSequence,
         'credit_note_numbering_sequence' => CreditNoteNumberingSequence,
         'invoice' => Invoice,
-        'invoice_item' => InvoiceItem,
-        'customer' => Customer
+        'credit_note' => CreditNote,
+        'item' => Item,
+        'customer' => Customer,
+        'document_template' => DocumentTemplate,
+        'document_language' => DocumentLanguage,
+        'checkout' => Checkout,
+        'coupon' => Coupon,
+        'tax_region_setting' => TaxRegionSetting,
+        'transaction' => Transaction,
+        'tax_evidence' => TaxEvidence,
+        'document_email_template' => DocumentEmailTemplate,
+        'exports_setting' => ExportsSetting,
+        'document' => Document,
+        'emails_setting' => EmailsSetting
       }
     end
 
-    def self.convert_to_octobat_object(resp, api_key)
+    def self.convert_to_octobat_object(resp, api_key, parent_resource = nil)
       case resp
       when Array
-        resp.map { |i| convert_to_octobat_object(i, api_key) }
+        resp.map { |i| convert_to_octobat_object(i, api_key, parent_resource) }
       when Hash
         # Try converting to a known object class.  If none available, fall back to generic OctobatObject
-        object_classes.fetch(resp[:object], OctobatObject).construct_from(resp, api_key)
+        obj = object_classes.fetch(resp[:object], OctobatObject).construct_from(resp, api_key)
+        obj.parent_obj = parent_resource if parent_resource && obj.respond_to?(:parent_obj)
+        obj
       else
         resp
       end
@@ -132,7 +147,9 @@ module Octobat
       when String
         return opts, {}
       when Hash
-        headers = {}
+        headers = opts.clone
+        headers.delete(:api_key)
+
         if opts[:idempotency_key]
           headers[:idempotency_key] = opts[:idempotency_key]
         end

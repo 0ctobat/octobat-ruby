@@ -2,7 +2,7 @@ module Octobat
   class OctobatObject
     include Enumerable
 
-    attr_accessor :api_key
+    attr_accessor :api_key, :parent_obj
     @@permanent_attributes = Set.new([:api_key, :id])
 
     # The default :id method is deprecated and isn't useful to us
@@ -10,7 +10,7 @@ module Octobat
       undef :id
     end
 
-    def initialize(id=nil, api_key=nil)
+    def initialize(id=nil, opts={})
       # parameter overloading!
       if id.kind_of?(Hash)
         @retrieve_options = id.dup
@@ -20,7 +20,10 @@ module Octobat
         @retrieve_options = {}
       end
 
-      @api_key = api_key
+      @api_key = opts[:api_key]
+      
+      @retrieve_options.merge!(opts.clone).delete(:api_key)
+      
       @values = {}
       # This really belongs in APIResource, but not putting it there allows us
       # to have a unified inspect method
@@ -30,7 +33,7 @@ module Octobat
     end
 
     def self.construct_from(values, api_key=nil)
-      self.new(values[:id], api_key).refresh_from(values, api_key)
+      self.new(values[:id], api_key: api_key).refresh_from(values, api_key)
     end
 
     def to_s(*args)
@@ -63,6 +66,12 @@ module Octobat
       end
       values.each do |k, v|
         @values[k] = Util.convert_to_octobat_object(v, api_key)
+        
+        case @values[k]
+        when ListObject
+          @values[k].parent_resource = {self.object.to_sym => self.id}
+        end
+        
         @transient_values.delete(k)
         @unsaved_values.delete(k)
       end

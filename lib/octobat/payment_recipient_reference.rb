@@ -1,5 +1,5 @@
 module Octobat
-  class NumberingSequence < APIResource
+  class PaymentRecipientReference < APIResource
     extend Octobat::APIOperations::List
   end
 end
