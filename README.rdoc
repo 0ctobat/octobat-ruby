@@ -1,5 +1,9 @@
 = Octobat Ruby bindings
 
+== Important notice
+octobat > 2.0.0 is built to work only with Octobat v2 endpoint and your Octobat v2 credentials.
+If you don't use Octobat v2 yet, please use version 0.0.12.
+
 == Installation
 
 You don't need this source code unless you want to modify the gem. If
