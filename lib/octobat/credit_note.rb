@@ -9,8 +9,8 @@ module Octobat
       refresh_from(response, api_key)
     end
 
-    def confirm
-      response, api_key = Octobat.request(:patch, confirm_url, @api_key)
+    def confirm(confirmation_data = {})
+      response, api_key = Octobat.request(:patch, confirm_url, @api_key, confirmation_data)
       refresh_from(response, api_key)
     end
 
