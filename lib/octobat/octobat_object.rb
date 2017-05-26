@@ -19,10 +19,12 @@ module Octobat
       else
         @retrieve_options = {}
       end
-
+      
+      @headers = {}
       @api_key = opts[:api_key]
       
       @retrieve_options.merge!(opts.clone).delete(:api_key)
+      @headers['Octobat-Version'] = @retrieve_options.delete('Octobat-Version') if @retrieve_options.has_key?('Octobat-Version')
       
       @values = {}
       # This really belongs in APIResource, but not putting it there allows us

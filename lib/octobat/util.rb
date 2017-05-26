@@ -48,6 +48,8 @@ module Octobat
         'credit_note' => CreditNote,
         'item' => Item,
         'customer' => Customer,
+        'payout' => Payout,
+        'balance_transaction' => BalanceTransaction,
         'document_template' => DocumentTemplate,
         'document_language' => DocumentLanguage,
         'checkout' => Checkout,

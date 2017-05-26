@@ -19,13 +19,15 @@ module Octobat
     end
 
     def refresh
-      response, api_key = Octobat.request(:get, url, @api_key, @retrieve_options)
+      response, api_key = Octobat.request(:get, url, @api_key, @retrieve_options, @headers)
       refresh_from(response, api_key)
     end
 
     def self.retrieve(id, opts={})
       api_key, headers = Util.parse_opts(opts)
       opts[:api_key] ||= @api_key
+      
+      puts opts.inspect
             
       instance = self.new(id, opts)
       instance.refresh
