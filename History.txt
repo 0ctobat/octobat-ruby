@@ -1,3 +1,7 @@
+=== 2.0.6 2017-05-29
+* 1 minor enhancement:
+  * Fixbug on List to single resource, add headers & params
+
 === 2.0.5 2017-05-29
 * 1 minor enhancement:
   * Balance transactions belong to payouts
