@@ -26,9 +26,7 @@ module Octobat
     def self.retrieve(id, opts={})
       api_key, headers = Util.parse_opts(opts)
       opts[:api_key] ||= @api_key
-      
-      puts opts.inspect
-            
+                  
       instance = self.new(id, opts)
       instance.refresh
       instance

@@ -33,7 +33,20 @@ module Octobat
       api_key, headers = Util.parse_opts(opts)
       api_key ||= @api_key
       
-      response, api_key = Octobat.request(:get, "#{url}/#{CGI.escape(id)}", api_key)
+      if id.kind_of?(Hash)
+        retrieve_options = id.dup
+        retrieve_options.delete(:id)
+        id = id[:id]
+      else
+        retrieve_options = {}
+      end
+      
+      headers = {}
+      
+      retrieve_options.merge!(opts.clone).delete(:api_key)
+      headers['Octobat-Version'] = retrieve_options.delete('Octobat-Version') if retrieve_options.has_key?('Octobat-Version')
+            
+      response, api_key = Octobat.request(:get, "#{url}/#{CGI.escape(id)}", api_key, retrieve_options, headers)
       Util.convert_to_octobat_object(response, api_key, self.parent_resource)
     end
 
