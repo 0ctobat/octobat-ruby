@@ -15,11 +15,11 @@ module Octobat
     end
 
     def items(params = {})
-      Item.list(params.merge({ :invoice => id }), @api_key)
+      Item.list(params.merge({credit_note: id }), @api_key)
     end
 
     def transactions(params = {})
-      Transaction.list(params.merge(invoice: id), @api_key)
+      Transaction.list(params.merge(credit_note: id), @api_key)
     end
 
     private
