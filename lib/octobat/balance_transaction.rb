@@ -3,7 +3,6 @@ module Octobat
     extend Octobat::APIOperations::List
     
     def url
-      puts parent_obj
       !parent_obj.nil? ? parentize_url : super
     end
     

@@ -54,6 +54,7 @@ module Octobat
         'document_language' => DocumentLanguage,
         'checkout' => Checkout,
         'coupon' => Coupon,
+        'product' => Product,
         'tax_region_setting' => TaxRegionSetting,
         'transaction' => Transaction,
         'tax_evidence' => TaxEvidence,
