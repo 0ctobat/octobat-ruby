@@ -1,3 +1,11 @@
+=== 2.0.14 2019-07-24
+* 1 minor enhancement:
+  * Add Order
+  
+=== 2.0.13 2019-05-20
+* 1 minor enhancement:
+  * Add ProformaInvoices
+  
 === 2.0.11 2018-04-10
 * 1 minor enhancement:
   * Add CSV exports for payouts
