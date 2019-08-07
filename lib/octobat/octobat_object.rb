@@ -57,10 +57,11 @@ module Octobat
       # customer, where there is no persistent card parameter.  Mark those values
       # which don't persist as transient
 
-      instance_eval do
-        remove_accessors(removed)
-        add_accessors(added)
-      end
+      #instance_eval do
+      remove_accessors(removed)
+      add_accessors(added)
+      #end
+      
       removed.each do |k|
         @values.delete(k)
         @transient_values.add(k)
@@ -141,9 +142,10 @@ module Octobat
       metaclass.instance_eval do
         keys.each do |k|
           next if @@permanent_attributes.include?(k)
-          k_eq = :"#{k}="
-          remove_method(k) if method_defined?(k)
-          remove_method(k_eq) if method_defined?(k_eq)
+          
+          [k, :"#{k}="].each do |method_name|
+            remove_method(method_name) if method_defined?(method_name)
+          end
         end
       end
     end
@@ -152,9 +154,8 @@ module Octobat
       metaclass.instance_eval do
         keys.each do |k|
           next if @@permanent_attributes.include?(k)
-          k_eq = :"#{k}="
           define_method(k) { @values[k] }
-          define_method(k_eq) do |v|
+          define_method(:"#{k}=") do |v|
 =begin
             if v == ""
               raise ArgumentError.new(
