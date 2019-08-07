@@ -12,7 +12,7 @@ spec = Gem::Specification.new do |s|
   s.homepage = 'https://www.octobat.com/api'
   s.license = 'MIT'
 
-  s.add_dependency('rest-client', '>= 2.1.0.rc1', '< 4.0')
+  s.add_dependency('rest-client', '>= 1.4', '< 4.0')
   #s.add_dependency('mime-types', '>= 1.25', '< 3.0')
   #s.add_dependency('json', '~> 1.8.1')
 
