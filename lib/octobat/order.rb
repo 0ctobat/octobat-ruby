@@ -32,6 +32,4 @@ module Octobat
       end
 
   end
-
-
 end
