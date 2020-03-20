@@ -364,5 +364,5 @@ module Octobat
 
     sleep_seconds
   end
-
+  
 end
