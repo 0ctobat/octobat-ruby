@@ -51,7 +51,6 @@ require 'octobat/exports_setting'
 require 'octobat/emails_setting'
 require 'octobat/tax_id'
 
-
 # Errors
 require 'octobat/errors/octobat_error'
 require 'octobat/errors/octobat_lib_error'

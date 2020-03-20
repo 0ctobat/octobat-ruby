@@ -2,6 +2,10 @@
 * 1 major enhancement:
   * Update rest-client to 2.1.0.rc1 because of memory leaks
 
+=== 2.0.16 2020-03-20
+* 1 major enhancement:
+  * Add TaxId resource
+
 === 2.0.15 2019-09-10
 * 1 minor enhancement:
   * Add Setup Intent statuses support for Orders
