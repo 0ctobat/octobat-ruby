@@ -64,7 +64,8 @@ module Octobat
         'document_email_template' => DocumentEmailTemplate,
         'exports_setting' => ExportsSetting,
         'document' => Document,
-        'emails_setting' => EmailsSetting
+        'emails_setting' => EmailsSetting,
+        'tax_id' => TaxId
       }
     end
 
