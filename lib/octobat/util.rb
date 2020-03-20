@@ -58,6 +58,7 @@ module Octobat
         'product' => Product,
         'proforma_invoice' => ProformaInvoice,
         'tax_region_setting' => TaxRegionSetting,
+        'tax_id' => TaxId,
         'transaction' => Transaction,
         'tax_evidence' => TaxEvidence,
         'tax_evidence_request' => TaxEvidenceRequest,
