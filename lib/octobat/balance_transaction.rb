@@ -1,6 +1,7 @@
 module Octobat
   class BalanceTransaction < APIResource
     extend Octobat::APIOperations::List
+    include Octobat::APIOperations::Update
     
     def url
       !parent_obj.nil? ? parentize_url : super
@@ -17,6 +18,8 @@ module Octobat
     def self.url
       if @parent_resource.include?(:payout)
         "#{Payout.url}/#{CGI.escape(@parent_resource[:payout])}/balance_transactions"
+      else
+        "/balance_transactions"
       end
     end
 
