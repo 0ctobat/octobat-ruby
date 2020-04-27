@@ -1,3 +1,7 @@
+=== 2.1.0.rc4 2020-04-27
+* 1 minor enhancement:
+  * Merge 2.0.x behaviours
+
 === 2.1.0.rc3 2020-04-07
 * 1 minor enhancement:
   * Update balance transactions resource
@@ -5,6 +9,10 @@
 === 2.1.0.rc1 2019-08-07
 * 1 major enhancement:
   * Update rest-client to 2.1.0.rc1 because of memory leaks
+
+=== 2.0.17 2020-04-27
+* 1 minor enhancement:
+  * Update Order API endpoints
 
 === 2.0.16 2020-03-20
 * 1 major enhancement:
