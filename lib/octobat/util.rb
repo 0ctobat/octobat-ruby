@@ -65,7 +65,11 @@ module Octobat
         'document_email_template' => DocumentEmailTemplate,
         'exports_setting' => ExportsSetting,
         'document' => Document,
-        'emails_setting' => EmailsSetting
+        'emails_setting' => EmailsSetting,
+        'file' => FileUpload,
+        'file_link' => FileLink,
+        'reporting.report_type' => Reporting::ReportType,
+        'reporting.report_run' => Reporting::ReportRun
       }
     end
 

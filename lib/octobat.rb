@@ -17,6 +17,7 @@ require 'octobat/api_operations/delete'
 require 'octobat/api_operations/list'
 
 # Resources
+require 'octobat/multipart_encoder'
 require 'octobat/util'
 require 'octobat/octobat_object'
 require 'octobat/api_resource'
@@ -51,6 +52,12 @@ require 'octobat/exports_setting'
 require 'octobat/emails_setting'
 require 'octobat/tax_id'
 
+require 'octobat/file_upload'
+require 'octobat/file_link'
+require 'octobat/reporting/report_type'
+require 'octobat/reporting/report_run'
+
+
 # Errors
 require 'octobat/errors/octobat_error'
 require 'octobat/errors/octobat_lib_error'
@@ -63,6 +70,7 @@ module Octobat
   #DEFAULT_CA_BUNDLE_PATH = File.dirname(__FILE__) + '/data/ca-certificates.crt'
   @api_base = 'https://apiv2.octobat.com'
   #@api_base = 'http://api.octobat.local:3052'
+  @uploads_base = "https://files.octobat.com"
 
   @max_network_retries = 0
   @max_network_retry_delay = 2
@@ -75,7 +83,7 @@ module Octobat
 
 
   class << self
-    attr_accessor :api_key, :api_base, :verify_ssl_certs, :api_version
+    attr_accessor :api_key, :api_base, :verify_ssl_certs, :api_version, :uploads_base
     attr_reader :max_network_retry_delay, :initial_network_retry_delay
   end
 
