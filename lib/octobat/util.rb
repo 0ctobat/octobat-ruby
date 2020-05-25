@@ -66,7 +66,10 @@ module Octobat
         'exports_setting' => ExportsSetting,
         'document' => Document,
         'emails_setting' => EmailsSetting,
-        'tax_id' => TaxId
+        'file' => FileUpload,
+        'file_link' => FileLink,
+        'reporting.report_type' => Reporting::ReportType,
+        'reporting.report_run' => Reporting::ReportRun
       }
     end
 

@@ -1,3 +1,7 @@
+=== 2.1.0.rc5 2020-05-25
+* 1 minor enhancement:
+  * Merge 2.0.x behaviours (2.0.18)
+  
 === 2.1.0.rc4 2020-04-27
 * 1 minor enhancement:
   * Merge 2.0.x behaviours
@@ -9,6 +13,12 @@
 === 2.1.0.rc1 2019-08-07
 * 1 major enhancement:
   * Update rest-client to 2.1.0.rc1 because of memory leaks
+  
+=== 2.0.18 2020-05-25
+* 3 major enhancements:
+  * Add support for multipart encoder (file upload)
+  * Add support for File API endpoints
+  * Add support for Reporting API endpoints
 
 === 2.0.17 2020-04-27
 * 1 minor enhancement:
