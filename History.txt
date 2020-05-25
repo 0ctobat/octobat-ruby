@@ -1,3 +1,9 @@
+=== 2.0.18 2020-05-25
+* 3 major enhancements:
+  * Add support for multipart encoder (file upload)
+  * Add support for File API endpoints
+  * Add support for Reporting API endpoints
+
 === 2.0.17 2020-04-27
 * 1 minor enhancement:
   * Update Order API endpoints

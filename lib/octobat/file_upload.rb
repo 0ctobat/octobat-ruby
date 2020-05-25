@@ -49,6 +49,8 @@ module Octobat
 
       obj
     end
+    
+    self.singleton_class.send(:alias_method, :all, :list)
 
     
     
