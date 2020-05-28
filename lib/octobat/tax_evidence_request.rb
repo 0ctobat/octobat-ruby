@@ -9,7 +9,7 @@ module Octobat
 
       instance = self.new(nil, opts)
 
-      response, api_key = Octobat.request(:post, url + '/for_supplier', api_key, params)
+      response, api_key = Octobat.request(:post, url + '/for_supplier', api_key, params, opts)
       instance.refresh_from(response, api_key)
       instance
     end

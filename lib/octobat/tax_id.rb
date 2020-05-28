@@ -4,8 +4,8 @@ module Octobat
     include Octobat::APIOperations::Create
     include Octobat::APIOperations::Update
 
-    def archive
-      response, api_key = Octobat.request(:patch, archive_url, @api_key)
+    def archive(params = {}, opts = {})
+      response, api_key = Octobat.request(:patch, archive_url, @api_key, params, opts)
       refresh_from(response, api_key)
     end
 

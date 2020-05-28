@@ -5,16 +5,16 @@ module Octobat
     include Octobat::APIOperations::Update
     include Octobat::APIOperations::Delete
 
-    def invoices(params = {})
-      Invoice.all(params.merge({ :customer => id }), @api_key)
+    def invoices(params = {}, opts = {})
+      Invoice.list(params.merge({ :customer => id }), {api_key: @api_key}.merge(opts))
     end
 
-    def credit_notes(params = {})
-      CreditNote.all(params.merge({ :customer => id }), @api_key)
+    def credit_notes(params = {}, opts = {})
+      CreditNote.list(params.merge({ :customer => id }), {api_key: @api_key}.merge(opts))
     end
 
-    def payment_sources(params = {})
-      PaymentSource.all(params.merge({ :customer => id }), @api_key)
+    def payment_sources(params = {}, opts = {})
+      PaymentSource.list(params.merge({ :customer => id }), {api_key: @api_key}.merge(opts))
     end
   end
 end

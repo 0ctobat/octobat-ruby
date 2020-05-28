@@ -1,3 +1,7 @@
+=== 2.1.0.rc6 2020-05-28
+* 1 minor enhancement:
+  * Merge 2.0.x behaviours (2.0.19)
+  
 === 2.1.0.rc5 2020-05-25
 * 1 minor enhancement:
   * Merge 2.0.x behaviours (2.0.18)
@@ -13,7 +17,13 @@
 === 2.1.0.rc1 2019-08-07
 * 1 major enhancement:
   * Update rest-client to 2.1.0.rc1 because of memory leaks
-  
+
+=== 2.0.19 2020-05-28
+* 2 major enhancements:
+  * Add { opts } param for all nested methods, so you can include headers such as the Connected Octobat Account ID in subrequests
+  * Add support for CreditNote#cancel endpoint
+
+
 === 2.0.18 2020-05-25
 * 3 major enhancements:
   * Add support for multipart encoder (file upload)
