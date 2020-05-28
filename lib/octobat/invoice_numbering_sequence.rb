@@ -4,8 +4,8 @@ module Octobat
     include Octobat::APIOperations::Create
     include Octobat::APIOperations::Update
 
-    def set_to_default
-      response, api_key = Octobat.request(:patch, set_to_default_url, @api_key)
+    def set_to_default(params = {}, opts = {})
+      response, api_key = Octobat.request(:patch, set_to_default_url, @api_key, params, opts)
       refresh_from(response, api_key)
     end
 

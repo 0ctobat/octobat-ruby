@@ -2,8 +2,8 @@ module Octobat
   class Payout < APIResource
     extend Octobat::APIOperations::List
     
-    def balance_transactions(params = {})
-      BalanceTransaction.list(params.merge({ payout: id }), @api_key)
+    def balance_transactions(params = {}, opts = {})
+      BalanceTransaction.list(params.merge({ payout: id }), {api_key: @api_key}.merge(opts))
     end
     
     def self.csv_export(params = {}, opts={})

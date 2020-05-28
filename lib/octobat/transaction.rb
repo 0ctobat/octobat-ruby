@@ -4,8 +4,8 @@ module Octobat
     include Octobat::APIOperations::Create
     include Octobat::APIOperations::Update
 
-    def items(params = {})
-      Item.list(params.merge({ :transaction => id }), @api_key)
+    def items(params = {}, opts = {})
+      Item.list(params.merge({ :transaction => id }), {api_key: @api_key}.merge(opts))
     end
     
     def self.csv_export(params = {}, opts={})

@@ -12,7 +12,7 @@ module Octobat
 
       instance = self.new(nil, opts)
 
-      response, api_key = Octobat.request(:post, url + '/pdf_export', api_key, params)
+      response, api_key = Octobat.request(:post, url + '/pdf_export', api_key, params, opts)
       return true
     end
     
@@ -23,42 +23,42 @@ module Octobat
 
       instance = self.new(nil, opts)
 
-      response, api_key = Octobat.request(:post, url + '/csv_export', api_key, params)
+      response, api_key = Octobat.request(:post, url + '/csv_export', api_key, params, opts)
       return true
     end
     
 
-    def send_by_email(email_data = {})
-      response, api_key = Octobat.request(:post, send_url, @api_key, email_data)
+    def send_by_email(params = {}, opts = {})
+      response, api_key = Octobat.request(:post, send_url, @api_key, params, opts)
       refresh_from(response, api_key)
     end
 
-    def confirm(confirmation_data = {})
-      response, api_key = Octobat.request(:patch, confirm_url, @api_key, confirmation_data)
+    def confirm(params = {}, opts = {})
+      response, api_key = Octobat.request(:patch, confirm_url, @api_key, params, opts)
       refresh_from(response, api_key)
     end
 
-    def cancel
-      response, api_key = Octobat.request(:patch, cancel_url, @api_key)
+    def cancel(params = {}, opts = {})
+      response, api_key = Octobat.request(:patch, cancel_url, @api_key, params, opts)
       refresh_from(response, api_key)
     end
 
-    def cancel_and_replace
-      response, api_key = Octobat.request(:patch, cancel_and_replace_url, @api_key)
+    def cancel_and_replace(params = {}, opts = {})
+      response, api_key = Octobat.request(:patch, cancel_and_replace_url, @api_key, params, opts)
       refresh_from(response, api_key)
     end
 
-    def delete
-      response, api_key = Octobat.request(:delete, url, @api_key)
+    def delete(params = {}, opts = {})
+      response, api_key = Octobat.request(:delete, url, @api_key, params, opts)
       refresh_from(response, api_key)
     end
 
-    def items(params = {})
-      Item.list(params.merge({ :invoice => id }), @api_key)
+    def items(params = {}, opts = {})
+      Item.list(params.merge({ :invoice => id }), {api_key: @api_key}.merge(opts))
     end
 
-    def transactions(params = {})
-      Transaction.list(params.merge(invoice: id), @api_key)
+    def transactions(params = {}, opts = {})
+      Transaction.list(params.merge(invoice: id), {api_key: @api_key}.merge(opts))
     end
 
 

@@ -12,30 +12,41 @@ module Octobat
 
       instance = self.new(nil, opts)
 
-      response, api_key = Octobat.request(:post, url + '/pdf_export', api_key, params)
+      response, api_key = Octobat.request(:post, url + '/pdf_export', api_key, params, headers)
       return true
     end
     
 
-    def send_by_email(email_data = {})
-      response, api_key = Octobat.request(:post, send_url, @api_key, email_data)
+    def send_by_email(params = {}, opts = {})
+      response, api_key = Octobat.request(:post, send_url, @api_key, params, opts)
       refresh_from(response, api_key)
     end
 
-    def confirm(confirmation_data = {})
-      response, api_key = Octobat.request(:patch, confirm_url, @api_key, confirmation_data)
+    def confirm(params = {}, opts = {})
+      response, api_key = Octobat.request(:patch, confirm_url, @api_key, params, opts)
       refresh_from(response, api_key)
     end
+    
+    
+    def cancel(params = {}, opts = {})
+      response, api_key = Octobat.request(:patch, cancel_url, @api_key, params, opts)
+      refresh_from(response, api_key)
+    end
+    
+    
 
-    def items(params = {})
-      Item.list(params.merge({credit_note: id }), @api_key)
+    def items(params = {}, opts = {})
+      Item.list(params.merge({ credit_note: id }), {api_key: @api_key}.merge(opts))
     end
 
-    def transactions(params = {})
-      Transaction.list(params.merge(credit_note: id), @api_key)
+    def transactions(params = {}, opts = {})
+      Transaction.list(params.merge(credit_note: id), {api_key: @api_key}.merge(opts))
     end
 
     private
+      def cancel_url
+        url + '/cancel'
+      end
 
       def send_url
         url + '/send'
