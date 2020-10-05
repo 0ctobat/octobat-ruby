@@ -54,6 +54,7 @@ require 'octobat/tax_id'
 
 require 'octobat/file_upload'
 require 'octobat/file_link'
+require 'octobat/beanie/session'
 require 'octobat/reporting/report_type'
 require 'octobat/reporting/report_run'
 

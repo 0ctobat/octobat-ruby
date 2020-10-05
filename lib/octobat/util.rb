@@ -68,6 +68,7 @@ module Octobat
         'emails_setting' => EmailsSetting,
         'file' => FileUpload,
         'file_link' => FileLink,
+        'beanie.session' => Beanie::Session,
         'reporting.report_type' => Reporting::ReportType,
         'reporting.report_run' => Reporting::ReportRun
       }
