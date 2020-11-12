@@ -47,7 +47,10 @@ module Octobat
         'invoice' => Invoice,
         'credit_note' => CreditNote,
         'item' => Item,
+        'purchase_item' => PurchaseItem,
         'customer' => Customer,
+        'supplier' => Supplier,
+        'self_billing_invoice' => SelfBillingInvoice,
         'payout' => Payout,
         'balance_transaction' => BalanceTransaction,
         'document_template' => DocumentTemplate,
@@ -68,6 +71,7 @@ module Octobat
         'emails_setting' => EmailsSetting,
         'file' => FileUpload,
         'file_link' => FileLink,
+        'beanie.session' => Beanie::Session,
         'reporting.report_type' => Reporting::ReportType,
         'reporting.report_run' => Reporting::ReportRun
       }
