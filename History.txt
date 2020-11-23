@@ -1,3 +1,7 @@
+=== 2.0.22 2020-11-23
+* 1 minor enhancements:
+  * Add support for CustomerBalanceTransaction object
+
 === 2.0.21 2020-11-12
 * 3 major enhancements:
   * Add support for Supplier object
