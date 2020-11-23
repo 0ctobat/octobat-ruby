@@ -49,6 +49,7 @@ module Octobat
         'item' => Item,
         'purchase_item' => PurchaseItem,
         'customer' => Customer,
+        'customer_balance_transaction' => CustomerBalanceTransaction,
         'supplier' => Supplier,
         'self_billing_invoice' => SelfBillingInvoice,
         'payout' => Payout,

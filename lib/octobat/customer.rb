@@ -16,5 +16,10 @@ module Octobat
     def payment_sources(params = {}, opts = {})
       PaymentSource.list(params.merge({ :customer => id }), {api_key: @api_key}.merge(opts))
     end
+    
+    def customer_balance_transactions(params = {}, opts = {})
+      CustomerBalanceTransaction.list(params.merge({ :customer => id }), {api_key: @api_key}.merge(opts))
+    end
+    
   end
 end
