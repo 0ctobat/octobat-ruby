@@ -37,6 +37,12 @@ module Octobat
       response, api_key = Octobat.request(:patch, confirm_url, @api_key, params, opts)
       refresh_from(response, api_key)
     end
+    
+    def set_payment_terms(params = {}, opts = {})
+      response, api_key = Octobat.request(:patch, set_payment_terms_url, @api_key, params, opts)
+      refresh_from(response, api_key)
+    end
+    
 
     def cancel(params = {}, opts = {})
       response, api_key = Octobat.request(:patch, cancel_url, @api_key, params, opts)
@@ -70,6 +76,10 @@ module Octobat
 
       def confirm_url
         url + '/confirm'
+      end
+      
+      def set_payment_terms_url
+        url + '/set_payment_terms'
       end
 
       def cancel_url
