@@ -1,3 +1,7 @@
+=== 2.0.24 2020-12-15
+* 1 minor enhancements:
+  * Add support for Invoice#mark_uncollectible endpoint
+
 === 2.0.23 2020-12-03
 * 1 minor enhancements:
   * Add support for Invoice#set_payment_terms endpoint

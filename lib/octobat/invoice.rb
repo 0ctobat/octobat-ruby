@@ -43,6 +43,11 @@ module Octobat
       refresh_from(response, api_key)
     end
     
+    def mark_uncollectible(params = {}, opts = {})
+      response, api_key = Octobat.request(:patch, mark_uncollectible_url, @api_key, params, opts)
+      refresh_from(response, api_key)
+    end
+    
 
     def cancel(params = {}, opts = {})
       response, api_key = Octobat.request(:patch, cancel_url, @api_key, params, opts)
@@ -76,6 +81,10 @@ module Octobat
 
       def confirm_url
         url + '/confirm'
+      end
+      
+      def mark_uncollectible_url
+        url + '/mark_uncollectible'
       end
       
       def set_payment_terms_url

@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    octobat (2.0.23)
+    octobat (2.0.24)
       rest-client (>= 1.4, < 4.0)
 
 GEM
