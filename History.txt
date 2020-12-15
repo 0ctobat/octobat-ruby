@@ -1,3 +1,7 @@
+=== 2.1.0.rc10 2020-12-15
+* 1 minor enhancement:
+  * Merge 2.0.x behaviours (2.0.24)
+
 === 2.1.0.rc9 2020-12-03
 * 1 minor enhancement:
   * Merge 2.0.x behaviours (2.0.23)
@@ -30,6 +34,10 @@
 === 2.1.0.rc1 2019-08-07
 * 1 major enhancement:
   * Update rest-client to 2.1.0.rc1 because of memory leaks
+
+=== 2.0.24 2020-12-15
+* 1 minor enhancements:
+  * Add support for Invoice#mark_uncollectible endpoint
 
 === 2.0.23 2020-12-03
 * 1 minor enhancements:
