@@ -55,6 +55,8 @@ require 'octobat/document_email_template'
 require 'octobat/exports_setting'
 require 'octobat/emails_setting'
 require 'octobat/tax_id'
+require 'octobat/subscription'
+require 'octobat/usage_item'
 
 require 'octobat/file_upload'
 require 'octobat/file_link'

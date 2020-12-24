@@ -70,6 +70,8 @@ module Octobat
         'exports_setting' => ExportsSetting,
         'document' => Document,
         'emails_setting' => EmailsSetting,
+        'subscription' => Subscription,
+        'usage_item' => UsageItem,
         'file' => FileUpload,
         'file_link' => FileLink,
         'beanie.session' => Beanie::Session,
