@@ -1,3 +1,7 @@
+=== 2.1.0.rc11 2020-12-24
+* 1 minor enhancement:
+  * Merge 2.0.x behaviours (2.0.25)
+
 === 2.1.0.rc10 2020-12-15
 * 1 minor enhancement:
   * Merge 2.0.x behaviours (2.0.24)
@@ -34,6 +38,11 @@
 === 2.1.0.rc1 2019-08-07
 * 1 major enhancement:
   * Update rest-client to 2.1.0.rc1 because of memory leaks
+
+=== 2.0.25 2020-12-24
+* 2 major enhancements:
+  * Add support for Subscription object
+  * Add support for UsageItem object
 
 === 2.0.24 2020-12-15
 * 1 minor enhancements:
