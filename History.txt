@@ -1,3 +1,8 @@
+=== 2.0.25 2020-12-24
+* 2 major enhancements:
+  * Add support for Subscription object
+  * Add support for UsageItem object
+
 === 2.0.24 2020-12-15
 * 1 minor enhancements:
   * Add support for Invoice#mark_uncollectible endpoint
