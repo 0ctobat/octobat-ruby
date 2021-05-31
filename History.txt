@@ -1,3 +1,8 @@
+=== 2.0.26 2021-05-31
+* 2 major enhancements:
+  * Add support for Octobat Plaza endpoints
+  * Add persistence of the octobat_account header through requests
+
 === 2.0.25 2020-12-24
 * 2 major enhancements:
   * Add support for Subscription object
