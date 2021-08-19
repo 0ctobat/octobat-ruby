@@ -24,8 +24,10 @@ module Octobat
       @api_key = opts[:api_key]
       
       @retrieve_options.merge!(opts.clone).delete(:api_key)
+
       @headers['Octobat-Version'] = @retrieve_options.delete('Octobat-Version') if @retrieve_options.has_key?('Octobat-Version')
-      
+      @headers[:octobat_account] = @retrieve_options.delete(:octobat_account) if @retrieve_options.has_key?(:octobat_account)
+
       @values = {}
       # This really belongs in APIResource, but not putting it there allows us
       # to have a unified inspect method

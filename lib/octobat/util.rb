@@ -75,6 +75,9 @@ module Octobat
         'file' => FileUpload,
         'file_link' => FileLink,
         'beanie.session' => Beanie::Session,
+        'plaza.account' => Plaza::Account,
+        'plaza.capability' => Plaza::Capability,
+        'plaza.country_spec' => Plaza::CountrySpec,
         'reporting.report_type' => Reporting::ReportType,
         'reporting.report_run' => Reporting::ReportRun
       }
